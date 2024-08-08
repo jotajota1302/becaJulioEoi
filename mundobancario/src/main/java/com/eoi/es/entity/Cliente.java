@@ -1,8 +1,11 @@
 package com.eoi.es.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,11 +21,12 @@ public class Cliente {
 	@Column
 	private String direccion;
 
-	
+	@OneToMany(mappedBy = "cliente")
+	private List<Cuenta> cuentas;
 	
 	@Override
 	public String toString() {
-		return "Cliente [dni=" + dni + ", nombre=" + nombre + ", direccion=" + direccion + "]";
+		return "Cliente [dni=" + dni + ", nombre=" + nombre + ", direccion=" + direccion + ", cuentas=" + cuentas + "]";
 	}
 
 	public String getDni() {
@@ -47,6 +51,14 @@ public class Cliente {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
+	}
+
+	public List<Cuenta> getCuentas() {
+		return cuentas;
+	}
+
+	public void setCuentas(List<Cuenta> cuentas) {
+		this.cuentas = cuentas;
 	}
 
 
