@@ -7,27 +7,24 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 //DATA ACCES OBJECT - LA LOGICA DE TRABAJO CON BBDD - CRUD(CREATE - READ - UPDATE - DELETE)
-public class UsuarioDAOImpl {
+public class UsuarioDaoJpaImpl implements UsuarioDao {
 
 	EntityManager entityManager = Persistence.createEntityManagerFactory("PU_PRUEBA").createEntityManager();
-
-	// READ BY ID
+	
+	@Override
 	public Usuario findById(int id) {
 
 		return entityManager.find(Usuario.class, id);
-	}
-	
+	}	
 	// READ ALL
 	public List<?> findAll() {
 	
 		Query query = entityManager.createQuery("FROM Usuario");
 		
 		query=entityManager.createNativeQuery("SELECT * FROM USUARIO",Usuario.class);
-		return query.getResultList();
 		
+		return query.getResultList();		
 	}
-
-
 	// CREATE
 	public void create(Usuario usuario) {
 
@@ -35,7 +32,6 @@ public class UsuarioDAOImpl {
 		entityManager.persist(usuario);
 		entityManager.getTransaction().commit();
 	}
-
 	// UPDATE
 	public void update(Usuario usuario) {
 
@@ -43,7 +39,6 @@ public class UsuarioDAOImpl {
 		entityManager.merge(usuario);
 		entityManager.getTransaction().commit();
 	}
-
 	// DELETE
 	public void delete(Usuario usuario) {
 

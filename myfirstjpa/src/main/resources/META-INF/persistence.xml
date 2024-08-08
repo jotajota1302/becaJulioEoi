@@ -17,6 +17,4 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 		</properties>
 	</persistence-unit>
 	
-	
-	
 </persistence>
