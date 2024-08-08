@@ -14,16 +14,16 @@ public class Main {
 //		
 //		daoSubscripcion.create(sub);
 		
-		UsuarioDAOImpl dao= new UsuarioDAOImpl();
+//		UsuarioDAOImpl dao= new UsuarioDAOImpl();
 //		Usuario usuario = dao.findById(10);
 		
 //		System.out.println(usuario.getMascota().getNombre());
 		
-		Usuario user = dao.findById(5);
+//		Usuario user = dao.findById(5);
 		
-		System.out.println(user.getFavoritos());
-		
-		System.out.println(dao.findAll());
+//		System.out.println(user.getFavoritos());
+//		
+//		System.out.println(dao.findAll());
 		
 //		dao.delete(user);
 		
