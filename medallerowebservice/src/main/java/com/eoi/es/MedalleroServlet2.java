@@ -8,18 +8,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.eoi.es.model.Pais;
 import com.eoi.es.service.MedalleroService;
 import com.eoi.es.service.impl.MedalleroServiceMemImpl;
 
-@WebServlet("/ranking")
-public class MedalleroServlet extends HttpServlet {
+@WebServlet("/addmedalla")
+public class MedalleroServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+						
 		MedalleroService service= new MedalleroServiceMemImpl();
 		
-		response.getWriter().append("Medallero: " + service.findAll());
+		String pais=request.getParameter("pais");
+		String tipo=request.getParameter("tipo");
+	
+		service.add(Pais.fromCodigo(pais).getCodigo(), tipo);
+		
+		response.getWriter().append("Medalla añadida");
 		
 	}
 	

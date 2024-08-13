@@ -1,43 +1,54 @@
 package com.eoi.es.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.eoi.es.model.Medalla;
+import com.eoi.es.model.InformacionPais;
 import com.eoi.es.model.Pais;
 import com.eoi.es.service.MedalleroService;
 
 public class MedalleroServiceMemImpl implements MedalleroService {
 	
-	List<Medalla> medallas= new ArrayList<Medalla>();
-	
+	Map<String, InformacionPais> medallas=new HashMap<String, InformacionPais>();
+		
 	{		
-		medallas.add(new Medalla("Oro", Pais.USA, 5));
-		medallas.add(new Medalla("Oro", Pais.CHN, 3));
-		medallas.add(new Medalla("Oro", Pais.JPN, 2));		
-		medallas.add(new Medalla("Plata", Pais.ESP, 4));
-		medallas.add(new Medalla("Plata", Pais.AND, 1));
-		medallas.add(new Medalla("Plata", Pais.AUS, 2));		
-		medallas.add(new Medalla("Bronce", Pais.ECU, 6));
-		medallas.add(new Medalla("Bronce", Pais.ARG, 3));
-		medallas.add(new Medalla("Bronce", Pais.ALB, 1));
+		medallas.put(Pais.CHN.getCodigo(), new InformacionPais(0,23,5));
+		medallas.put(Pais.USA.getCodigo(), new InformacionPais(5,3,0));
+		medallas.put(Pais.ESP.getCodigo(), new InformacionPais(3,2,1));
+		medallas.put(Pais.JPN.getCodigo(), new InformacionPais(1,1,8));		
 	}
 	
 	@Override
-	public List<Medalla> findAll(){
+	public Map<String, InformacionPais> findAll(){
 		
-		//TODO ORDENAR LA LISTA DE MEDALLAS SEGUN CRITERIO OLIMPICO
-		// PRIMERO EL ORO, LUEGO LA PLATA y POR ULTIMO EL BRONCE
+		//logica de ordenacion con comparables
 		
 		return medallas;
 		
 	}
 	
 	
-	public void add(Medalla medalla){
+	public void add(String pais, String tipo){
 		
-		//TODO buscar en la lista el pais y el tipo y +1 la cantidad
 		
+		if(medallas.containsKey(pais)) {
+			
+			switch (tipo) {
+			case "oro":
+				medallas.get(pais).setOro(medallas.get(pais).getOro()+1);
+				break;
+			case "plata":
+				medallas.get(pais).setPlata(medallas.get(pais).getPlata()+1);
+				break;
+			case "bronce":
+				medallas.get(pais).setBronce(medallas.get(pais).getBronce()+1);
+				break;
+			default:
+				break;
+			}
+			
+			
+		}
 		
 		
 	}

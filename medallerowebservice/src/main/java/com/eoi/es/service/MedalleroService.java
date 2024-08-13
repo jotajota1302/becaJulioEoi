@@ -1,11 +1,13 @@
 package com.eoi.es.service;
 
-import java.util.List;
+import java.util.Map;
 
-import com.eoi.es.model.Medalla;
+import com.eoi.es.model.InformacionPais;
 
 public interface MedalleroService {
 
-	List<Medalla> findAll();
+	Map<String, InformacionPais> findAll();
+	
+	public void add(String pais, String tipo);
 
 }
