@@ -18,10 +18,18 @@ public class BeanLoadingApplication implements CommandLineRunner {
 	@Autowired	
 	MyService service;
 	
+	@Autowired
+	Labels labels;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		
-		System.out.println("mi aplicacion funciona");
+				
+		System.out.println("Selecciona un idioma:");
+		//lees la respuesta
+		
+		//cambias las labels al idioma en cuestion y vuelves al run
+		
 		service.doSomething();
 		
 	}
