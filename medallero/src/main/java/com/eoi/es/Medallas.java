@@ -20,6 +20,9 @@ public class Medallas {
 	
 	@Column
 	private int bronce;
+	
+	@Column
+	private int total;
 
 	
 	public String getPais() {
@@ -69,6 +72,14 @@ public class Medallas {
 
 	public Medallas() {
 		super();
+	}
+
+	public int getTotal() {
+		return oro+plata+bronce;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
 	}
 	
 

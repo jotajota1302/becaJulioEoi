@@ -1,6 +1,6 @@
 
 
-package com.eoi.es.model;
+package com.eoi.es;
 
 public enum Pais {
 

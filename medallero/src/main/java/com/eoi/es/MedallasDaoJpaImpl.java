@@ -18,7 +18,7 @@ public class MedallasDaoJpaImpl {
 	@SuppressWarnings("unchecked")
 	public List<Medallas> findAll() {
 
-		Query query = entityManager.createNativeQuery("SELECT * FROM medallas order by oro desc,plata desc,bronce desc",
+		Query query = entityManager.createNativeQuery("pais,oro,plata,bronce,(oro+plata+bronce) as TOTAL FROM medallas order by oro desc,plata desc,bronce desc",
 				Medallas.class);
 
 		return query.getResultList();

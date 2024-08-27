@@ -8,21 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.eoi.es.model.Pais;
-import com.eoi.es.service.MedalleroService;
-import com.eoi.es.service.impl.MedalleroServiceMemImpl;
-
-@WebServlet("/addmedalla")
-public class MedalleroServlet2 extends HttpServlet {
+@WebServlet("/add")
+public class UpdateMedallasServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 						
-		MedalleroService service= new MedalleroServiceMemImpl();
+		MedallasServiceImpl service= new MedallasServiceImpl();
 		
 		String pais=request.getParameter("pais");
 		String tipo=request.getParameter("tipo");
 	
+		//TODO VALIDADOR que estos campos esten bien
+		
 		service.add(Pais.fromCodigo(pais).getCodigo(), tipo);
 		
 		response.getWriter().append("Medalla añadida");
