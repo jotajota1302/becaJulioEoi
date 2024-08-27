@@ -8,4 +8,10 @@ public class UsaService implements MyService {
 		System.out.println("Do something from USA");
 	}
 
+	@Override
+	public double calculateSomething(Double a, Double b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

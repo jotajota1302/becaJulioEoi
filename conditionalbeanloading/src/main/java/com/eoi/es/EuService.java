@@ -7,4 +7,10 @@ public class EuService implements MyService{
 		System.out.println("Hago algo desde Europa");
 	}
 
+	@Override
+	public double calculateSomething(Double a, Double b) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
