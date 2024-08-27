@@ -27,17 +27,24 @@ public class BeanLoadingApplication implements CommandLineRunner {
 	}
 	
 	@Bean
-	@ConditionalOnProperty(prefix = "",name = "loadbean",havingValue = "one")
+	@ConditionalOnProperty(prefix = "service",name = "zone",havingValue = "ASIA")
 	MyService getOne() {
 		
-		return new MyServiceOne();
+		return new AsiaService();
 	}
 	
 	@Bean
-	@ConditionalOnProperty(prefix = "",name = "loadbean",havingValue = "two")
+	@ConditionalOnProperty(prefix = "service",name = "zone",havingValue = "EU")
 	MyService getTwo() {
 		
-		return new MyServiceTwo();
+		return new EuService();
+	}
+	
+	@Bean
+	@ConditionalOnProperty(prefix = "service",name = "zone",havingValue = "USA")
+	MyService getThree() {
+		
+		return new UsaService();
 	}
 
 }
