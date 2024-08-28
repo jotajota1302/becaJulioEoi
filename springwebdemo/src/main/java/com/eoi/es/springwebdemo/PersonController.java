@@ -89,6 +89,12 @@ public class PersonController {
 	@ResponseBody
 	public void deletePerson(@RequestParam String nombre) {
 
+//		for (Person person : personas) {
+//			if (person.getNombre().equals(nombre)) {
+//				personas.remove(person);
+//			}
+//		}
+		
 		personas.remove(personas.stream().filter(p -> p.getNombre().equals(nombre)).findFirst().get());
 	}
 
