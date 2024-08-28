@@ -29,22 +29,21 @@ public class PersonController {
 	@ResponseBody
 	public void createPerson() {
 
-		personas.add(Person.builder().nombre("JJ").apellidos("JIMENEZ").build());
-	
+		personas.add(Person.builder().nombre("JJ").apellidos("JIMENEZ").build());	
 	}
 	
 	@PutMapping
 	@ResponseBody
 	public void updatePerson() {
 		
-		System.out.println("update person from put");
+		personas.get(personas.size()-1).setApellidos("RODRIGUEZ");
 	}
 	
 	@DeleteMapping
 	@ResponseBody
 	public void deletePerson() {
 		
-		System.out.println("delete person from delete");
+		personas.remove(personas.size()-1);
 	}
 	
 }
