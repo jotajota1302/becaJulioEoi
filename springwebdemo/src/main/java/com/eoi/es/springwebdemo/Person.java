@@ -1,5 +1,8 @@
 package com.eoi.es.springwebdemo;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,10 +16,19 @@ import lombok.Setter;
 @Builder
 public class Person {
 
-	private String nombre;
+	@NotNull
+	private String name;
 	
-	private String apellidos;
+	@NotNull
+	private String surname;
 
-	private String dni;
+	@NotNull
+	private String dni;	
+
+	private String mail;
+	
+	@NotNull
+	@Size(min = 8)
+	private String password;
 	
 }

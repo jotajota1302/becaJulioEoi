@@ -2,10 +2,11 @@ package com.eoi.es.springwebdemo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,43 +21,38 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/person")
 public class PersonController {
 
-	ArrayList<Person> personas = new ArrayList<Person>();
-
-	{
-		personas.add(Person.builder().nombre("JJ").apellidos("JIMENEZ").build());
-		personas.add(Person.builder().nombre("Maria").apellidos("RODRIGUEZ").build());
-	}
+	ArrayList<Person> persons = new ArrayList<Person>();
 
 	@GetMapping
 	@ResponseBody
-	public Person getPersona(@RequestParam(required = false) String nombre) {
+	public Person getPersona(@RequestParam(required = false) String name) {
 
-		for (Person person : personas) {
-			if (person.getNombre().equals(nombre)) {
+		for (Person person : persons) {
+			if (person.getName().equals(name)) {
 				return person;
 			}
 		}
 		return null;
 	}
 
-	@GetMapping(value = "/nombre/{nombre}")
+	@GetMapping(value = "/name/{name}")
 	@ResponseBody
-	public Person getPersonaByPath(@PathVariable String nombre) {
+	public Person getPersonaByPath(@PathVariable String name) {
 
-		for (Person person : personas) {
-			if (person.getNombre().equals(nombre)) {
+		for (Person person : persons) {
+			if (person.getName().equals(name)) {
 				return person;
 			}
 		}
 		return null;
 	}
 
-	@GetMapping(value = "/apellidos/{apellidos}")
+	@GetMapping(value = "/surname/{surname}")
 	@ResponseBody
-	public Person getPersonaByApellidos(@PathVariable String apellidos) {
+	public Person getPersonBySurname(@PathVariable String surname) {
 
-		for (Person person : personas) {
-			if (person.getApellidos().equals(apellidos)) {
+		for (Person person : persons) {
+			if (person.getSurname().equals(surname)) {
 				return person;
 			}
 		}
@@ -65,46 +61,37 @@ public class PersonController {
 
 	@GetMapping(value = "/all")
 	@ResponseBody
-	public List<Person> getPersonas() {
+	public List<Person> getPersons() {
 
-		return personas;
+		return persons;
 	}
 
 	@PostMapping
 	@ResponseBody
-	public void createPerson(@RequestBody Person person) {
+	public void createPerson(@RequestBody @Valid Person person, BindingResult result) {
 		
-		Pattern pattern=Pattern.compile("\\d{8}[A-HJ-NP-TV-Z]");		
-		Matcher matcher=pattern.matcher(person.getDni());
-		
-		if(matcher.matches()) {
-			personas.add(person);
-		}else {
-			System.out.println("formato incorrecto del dni");
+		if(result.hasErrors()) {
+			System.out.println("hay campos incorrectos");
 		}
-		
+		else {
+			persons.add(person);
+		}
 	}
 
 	@PutMapping
 	@ResponseBody
 	public void updatePersonSurname(@RequestBody Person person) {
 
-		personas.stream().filter(p -> p.getNombre().equals(person.getNombre())).findFirst().get()
-				.setApellidos(person.getApellidos());
+		persons.stream().filter(p -> p.getName().equals(person.getName())).findFirst().get()
+				.setSurname(person.getSurname());
 
 	}
 
 	@DeleteMapping
 	@ResponseBody
-	public void deletePerson(@RequestParam String nombre) {
+	public void deletePerson(@RequestParam String name) {
 
-//		for (Person person : personas) {
-//			if (person.getNombre().equals(nombre)) {
-//				personas.remove(person);
-//			}
-//		}
-
-		personas.remove(personas.stream().filter(p -> p.getNombre().equals(nombre)).findFirst().get());
+		persons.remove(persons.stream().filter(p -> p.getName().equals(name)).findFirst().get());
 	}
 
 }
