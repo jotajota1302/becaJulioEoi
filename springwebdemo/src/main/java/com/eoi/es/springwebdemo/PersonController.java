@@ -2,6 +2,8 @@ package com.eoi.es.springwebdemo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -71,9 +73,16 @@ public class PersonController {
 	@PostMapping
 	@ResponseBody
 	public void createPerson(@RequestBody Person person) {
-
-		personas.add(person);
-
+		
+		Pattern pattern=Pattern.compile("\\d{8}[A-HJ-NP-TV-Z]");		
+		Matcher matcher=pattern.matcher(person.getDni());
+		
+		if(matcher.matches()) {
+			personas.add(person);
+		}else {
+			System.out.println("formato incorrecto del dni");
+		}
+		
 	}
 
 	@PutMapping
@@ -82,7 +91,7 @@ public class PersonController {
 
 		personas.stream().filter(p -> p.getNombre().equals(person.getNombre())).findFirst().get()
 				.setApellidos(person.getApellidos());
-		
+
 	}
 
 	@DeleteMapping
@@ -94,7 +103,7 @@ public class PersonController {
 //				personas.remove(person);
 //			}
 //		}
-		
+
 		personas.remove(personas.stream().filter(p -> p.getNombre().equals(nombre)).findFirst().get());
 	}
 
