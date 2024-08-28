@@ -15,13 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/person")
 public class PersonController {
 
+	ArrayList<Person> personas=new ArrayList<Person>();
+	
+	
 	@GetMapping
 	@ResponseBody
-	public List<Person> getPersonas() {
-
-		ArrayList<Person> personas=new ArrayList<Person>();
-		personas.add(Person.builder().nombre("JJ").apellidos("JIMENEZ").build());
-		personas.add(Person.builder().nombre("MARIA").apellidos("PEREZ").build());
+	public List<Person> getPersonas() {		
 		
 		return personas;
 	}
@@ -29,22 +28,23 @@ public class PersonController {
 	@PostMapping
 	@ResponseBody
 	public void createPerson() {
-		
-		System.out.println("create person from post");
+
+		personas.add(Person.builder().nombre("JJ").apellidos("JIMENEZ").build());
+	
 	}
 	
 	@PutMapping
 	@ResponseBody
 	public void updatePerson() {
 		
-		System.out.println("update person from post");
+		System.out.println("update person from put");
 	}
 	
 	@DeleteMapping
 	@ResponseBody
 	public void deletePerson() {
 		
-		System.out.println("delete person from post");
+		System.out.println("delete person from delete");
 	}
 	
 }
