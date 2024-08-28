@@ -1,8 +1,7 @@
 package com.eoi.es.springwebdemo;
 
 import java.util.ArrayList;
-
-import javax.websocket.server.PathParam;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,6 +36,7 @@ public class PersonController {
 		return null;
 	}
 	
+	
 	@GetMapping(value = "/nombre/{nombre}")
 	@ResponseBody
 	public Person getPersonaByPath( @PathVariable String nombre) {		
@@ -49,12 +49,24 @@ public class PersonController {
 		return null;
 	}
 	
-//	@GetMapping
-//	@ResponseBody
-//	public List<Person> getPersonas() {		
-//		
-//		return personas;
-//	}
+	@GetMapping(value = "/apellidos/{apellidos}")
+	@ResponseBody
+	public Person getPersonaByApellidos( @PathVariable String apellidos) {		
+		
+		for (Person person : personas) {
+			if(person.getApellidos().equals(apellidos)) {
+				return person;
+			}
+		}				
+		return null;
+	}
+	
+	@GetMapping(value = "/all")
+	@ResponseBody
+	public List<Person> getPersonas() {		
+		
+		return personas;
+	}
 	
 	@PostMapping
 	@ResponseBody
