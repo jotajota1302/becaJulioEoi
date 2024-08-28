@@ -27,18 +27,21 @@ public class PersonController {
 	}
 	
 	@PostMapping
+	@ResponseBody
 	public void createPerson() {
 		
 		System.out.println("create person from post");
 	}
 	
 	@PutMapping
+	@ResponseBody
 	public void updatePerson() {
 		
 		System.out.println("update person from post");
 	}
 	
 	@DeleteMapping
+	@ResponseBody
 	public void deletePerson() {
 		
 		System.out.println("delete person from post");
