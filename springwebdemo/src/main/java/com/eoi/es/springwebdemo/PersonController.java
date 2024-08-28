@@ -1,14 +1,17 @@
 package com.eoi.es.springwebdemo;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import javax.websocket.server.PathParam;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -17,13 +20,41 @@ public class PersonController {
 
 	ArrayList<Person> personas=new ArrayList<Person>();
 	
+	{
+		personas.add(Person.builder().nombre("JJ").apellidos("JIMENEZ").build());	
+		personas.add(Person.builder().nombre("Maria").apellidos("RODRIGUEZ").build());	
+	}
 	
 	@GetMapping
 	@ResponseBody
-	public List<Person> getPersonas() {		
+	public Person getPersona(@RequestParam(required = false) String nombre) {		
 		
-		return personas;
+		for (Person person : personas) {
+			if(person.getNombre().equals(nombre)) {
+				return person;
+			}
+		}				
+		return null;
 	}
+	
+	@GetMapping(value = "/nombre/{nombre}")
+	@ResponseBody
+	public Person getPersonaByPath( @PathVariable String nombre) {		
+		
+		for (Person person : personas) {
+			if(person.getNombre().equals(nombre)) {
+				return person;
+			}
+		}				
+		return null;
+	}
+	
+//	@GetMapping
+//	@ResponseBody
+//	public List<Person> getPersonas() {		
+//		
+//		return personas;
+//	}
 	
 	@PostMapping
 	@ResponseBody
@@ -45,5 +76,6 @@ public class PersonController {
 		
 		personas.remove(personas.size()-1);
 	}
+	
 	
 }
