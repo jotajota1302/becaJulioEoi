@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,18 +14,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.eoi.es.springwebdemo.model.Person;
 
-@Controller
+@RestController
 @RequestMapping("/person")
 public class PersonController {
 
 	ArrayList<Person> persons = new ArrayList<Person>();
 
-	@GetMapping
-	@ResponseBody
+	@GetMapping	
 	public Person getPersona(@RequestParam(required = false) String name) {
 
 		for (Person person : persons) {
@@ -37,8 +35,7 @@ public class PersonController {
 		return null;
 	}
 
-	@GetMapping(value = "/name/{name}")
-	@ResponseBody
+	@GetMapping(value = "/{name}")	
 	public Person getPersonaByPath(@PathVariable String name) {
 
 		for (Person person : persons) {
@@ -49,8 +46,7 @@ public class PersonController {
 		return null;
 	}
 
-	@GetMapping(value = "/surname/{surname}")
-	@ResponseBody
+	@GetMapping(value = "/surname/{surname}")	
 	public Person getPersonBySurname(@PathVariable String surname) {
 
 		for (Person person : persons) {
@@ -61,27 +57,25 @@ public class PersonController {
 		return null;
 	}
 
-	@GetMapping(value = "/all")
-	@ResponseBody
+	@GetMapping(value = "/all")	
 	public List<Person> getPersons() {
 
 		return persons;
 	}
 
-	@PostMapping
-	@ResponseBody
+	@PostMapping	
 	public void createPerson(@RequestBody @Valid Person person, BindingResult result) {
 		
 		if(result.hasErrors()) {
 			System.out.println("hay campos incorrectos");
+			System.out.println("errores: " + result.getAllErrors());			
 		}
 		else {
 			persons.add(person);
 		}
 	}
 
-	@PutMapping
-	@ResponseBody
+	@PutMapping	
 	public void updatePersonSurname(@RequestBody Person person) {
 
 		persons.stream().filter(p -> p.getName().equals(person.getName())).findFirst().get()
@@ -89,8 +83,7 @@ public class PersonController {
 
 	}
 
-	@DeleteMapping
-	@ResponseBody
+	@DeleteMapping	
 	public void deletePerson(@RequestParam String name) {
 
 		persons.remove(persons.stream().filter(p -> p.getName().equals(name)).findFirst().get());
