@@ -1,4 +1,4 @@
-package com.eoi.es.springwebdemo.model;
+package com.eoi.es.springwebdemo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,10 +11,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Book {
-	
+public class Banco {
+
 	private int id;
-	private String title;
-	private String author;
-	private String category;
+	
+	private String nombre;
+	
+	private String ciudad;
+	
 }

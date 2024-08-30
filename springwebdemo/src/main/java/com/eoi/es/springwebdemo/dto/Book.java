@@ -1,6 +1,4 @@
-package com.eoi.es.springwebdemo.model;
-
-import java.util.List;
+package com.eoi.es.springwebdemo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,21 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Cliente {
+public class Book {
 	
-	private String dni;
-	
-	private String nombre;
-	
-	private String direccion;
-	
-	private List<Banco> bancos;
-	
+	private int id;
+	private String title;
+	private String author;
+	private String category;
 }
-	

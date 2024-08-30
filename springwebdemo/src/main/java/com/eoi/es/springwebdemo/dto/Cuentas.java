@@ -1,4 +1,4 @@
-package com.eoi.es.springwebdemo.model;
+package com.eoi.es.springwebdemo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,12 +11,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Banco {
+public class Cuentas {
 
-	private int id;
+	private ClienteDto cliente;
 	
-	private String nombre;
+	private double saldo;
 	
-	private String ciudad;
+	private Banco banco;
 	
 }

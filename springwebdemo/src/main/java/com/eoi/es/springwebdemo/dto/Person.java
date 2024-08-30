@@ -1,4 +1,4 @@
-package com.eoi.es.springwebdemo.model;
+package com.eoi.es.springwebdemo.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

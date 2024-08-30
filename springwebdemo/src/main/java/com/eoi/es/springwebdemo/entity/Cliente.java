@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "cliente")
 @Getter
 @Setter
 public class Cliente {
@@ -17,10 +17,10 @@ public class Cliente {
 	@Id
 	private String dni;
 	
-	@Column
+	@Column()
 	private String nombre;
 	
-	@Column
+	@Column()
 	private String direccion;
 	
 }

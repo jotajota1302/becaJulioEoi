@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.eoi.es.springwebdemo.model.Person;
+import com.eoi.es.springwebdemo.dto.Person;
 
 @RestController
 @RequestMapping("/person")
