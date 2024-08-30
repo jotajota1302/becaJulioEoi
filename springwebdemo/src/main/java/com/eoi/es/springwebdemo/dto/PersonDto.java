@@ -14,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Person {
+public class PersonDto {
 
 	@NotNull
 	private String name;

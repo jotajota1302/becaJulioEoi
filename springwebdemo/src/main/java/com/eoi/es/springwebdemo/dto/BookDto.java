@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Book {
+public class BookDto {
 	
 	private int id;
 	private String title;

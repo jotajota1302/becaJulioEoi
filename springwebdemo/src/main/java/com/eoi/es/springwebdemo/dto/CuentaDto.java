@@ -11,12 +11,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Cuentas {
+public class CuentaDto {
 
 	private ClienteDto cliente;
 	
 	private double saldo;
 	
-	private Banco banco;
+	private BancoDto banco;
 	
 }

@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.eoi.es.springwebdemo.dto.Banco;
+import com.eoi.es.springwebdemo.dto.BancoDto;
 
 @RestController
 @RequestMapping("/bancos")
 public class BancoController {
 
-	ArrayList<Banco> bancos = new ArrayList<Banco>();
+	ArrayList<BancoDto> bancos = new ArrayList<BancoDto>();
 
 	@GetMapping(value = "/{id}")
-	public Banco getBanco(@RequestParam Integer id) {
+	public BancoDto getBanco(@RequestParam Integer id) {
 
-		for (Banco banco : bancos) {
+		for (BancoDto banco : bancos) {
 			if (banco.getId()==id) {
 				return banco;
 			}
@@ -33,7 +33,7 @@ public class BancoController {
 	}
 
 	@PostMapping	
-	public void createBanco(@RequestBody @Valid Banco banco, BindingResult result) {
+	public void createBanco(@RequestBody @Valid BancoDto banco, BindingResult result) {
 		
 		if(result.hasErrors()) {
 			System.out.println("hay campos incorrectos");

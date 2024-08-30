@@ -16,18 +16,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.eoi.es.springwebdemo.dto.Person;
+import com.eoi.es.springwebdemo.dto.PersonDto;
 
 @RestController
 @RequestMapping("/person")
 public class PersonController {
 
-	ArrayList<Person> persons = new ArrayList<Person>();
+	ArrayList<PersonDto> persons = new ArrayList<PersonDto>();
 
 	@GetMapping	
-	public Person getPersona(@RequestParam(required = false) String name) {
+	public PersonDto getPersona(@RequestParam(required = false) String name) {
 
-		for (Person person : persons) {
+		for (PersonDto person : persons) {
 			if (person.getName().equals(name)) {
 				return person;
 			}
@@ -36,9 +36,9 @@ public class PersonController {
 	}
 
 	@GetMapping(value = "/{name}")	
-	public Person getPersonaByPath(@PathVariable String name) {
+	public PersonDto getPersonaByPath(@PathVariable String name) {
 
-		for (Person person : persons) {
+		for (PersonDto person : persons) {
 			if (person.getName().equals(name)) {
 				return person;
 			}
@@ -47,9 +47,9 @@ public class PersonController {
 	}
 
 	@GetMapping(value = "/surname/{surname}")	
-	public Person getPersonBySurname(@PathVariable String surname) {
+	public PersonDto getPersonBySurname(@PathVariable String surname) {
 
-		for (Person person : persons) {
+		for (PersonDto person : persons) {
 			if (person.getSurname().equals(surname)) {
 				return person;
 			}
@@ -58,13 +58,13 @@ public class PersonController {
 	}
 
 	@GetMapping(value = "/all")	
-	public List<Person> getPersons() {
+	public List<PersonDto> getPersons() {
 
 		return persons;
 	}
 
 	@PostMapping	
-	public void createPerson(@RequestBody @Valid Person person, BindingResult result) {
+	public void createPerson(@RequestBody @Valid PersonDto person, BindingResult result) {
 		
 		if(result.hasErrors()) {
 			System.out.println("hay campos incorrectos");
@@ -76,7 +76,7 @@ public class PersonController {
 	}
 
 	@PutMapping	
-	public void updatePersonSurname(@RequestBody Person person) {
+	public void updatePersonSurname(@RequestBody PersonDto person) {
 
 		persons.stream().filter(p -> p.getName().equals(person.getName())).findFirst().get()
 				.setSurname(person.getSurname());
