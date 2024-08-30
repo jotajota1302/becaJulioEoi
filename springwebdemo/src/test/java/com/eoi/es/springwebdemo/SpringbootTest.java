@@ -24,7 +24,7 @@ public class SpringbootTest {
 		//INSERTS
 		
 		Book nuevo= Book.builder().author("JK Rowling").genre("Fantastico").title("HARRY FLOWERS").build();
-//		bookRepository.save(nuevo);
+		bookRepository.save(nuevo);
 		
 		System.out.println(bookRepository.findAll());		
 		
@@ -33,7 +33,7 @@ public class SpringbootTest {
 		//DELETE
 		
 //		bookRepository.delete(nuevo);
-		bookRepository.deleteById(6);
+//		bookRepository.deleteById(6);
 		
 	}
 }

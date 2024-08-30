@@ -44,7 +44,7 @@ public class ClienteService {
 		for (Cliente cliente : clientes) {
 			
 			ClienteDto dto= new ClienteDto();
-			dto.setDni(cliente.getDni());
+			dto.setDni("#########");
 			dto.setNombre(cliente.getNombre());
 			//COMO CONSIGO EL SALDO
 			dto.setSaldo(500);

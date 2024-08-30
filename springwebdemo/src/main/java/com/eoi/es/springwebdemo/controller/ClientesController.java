@@ -2,6 +2,8 @@ package com.eoi.es.springwebdemo.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +43,7 @@ public class ClientesController {
 	}
 
 	@PostMapping
-	public ResponseEntity<String> create(@RequestBody ClienteDto cliente) {
+	public ResponseEntity<String> create(@RequestBody @Valid ClienteDto cliente) {
 
 		clienteService.create(cliente);
 
