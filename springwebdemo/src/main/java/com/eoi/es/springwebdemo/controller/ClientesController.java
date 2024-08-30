@@ -7,16 +7,16 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eoi.es.springwebdemo.dto.ClienteDto;
-import com.eoi.es.springwebdemo.entity.Cliente;
-import com.eoi.es.springwebdemo.repository.ClienteRepository;
 import com.eoi.es.springwebdemo.service.ClienteService;
 
 @RestController
@@ -25,9 +25,6 @@ public class ClientesController {
 
 	@Autowired
 	ClienteService clienteService;
-	
-	@Autowired
-	ClienteRepository clienteRepository;
 
 	@GetMapping
 	public ResponseEntity<List<ClienteDto>> findAll() {
@@ -50,22 +47,23 @@ public class ClientesController {
 		return new ResponseEntity<String>(HttpStatus.CREATED);
 
 	}
-//
-//	@PutMapping(value = "/{dni}")
-//	public ResponseEntity<String> update(@RequestBody Cliente cliente, @PathVariable String dni) {
-//
-//		clienteRepository.save(cliente);
-//
-//		return new ResponseEntity<String>(HttpStatus.ACCEPTED);
-//	}
-//
-//	@DeleteMapping(value = "/{dni}")
-//	public ResponseEntity<String> deleteById(@PathVariable String dni) {
-//
-//		clienteRepository.deleteById(dni);
-//		
-//		return new ResponseEntity<String>(HttpStatus.ACCEPTED);
-//
-//	}
+
+	@PutMapping(value = "/{dni}")
+	public ResponseEntity<String> update(@RequestBody ClienteDto cliente, @PathVariable String dni) {
+
+		clienteService.update(cliente);
+
+		return new ResponseEntity<String>(HttpStatus.ACCEPTED);
+	}
+
+	
+	@DeleteMapping(value = "/{dni}")
+	public ResponseEntity<String> deleteById(@PathVariable String dni) {
+
+		clienteService.deleteById(dni);
+		
+		return new ResponseEntity<String>(HttpStatus.ACCEPTED);
+
+	}
 
 }

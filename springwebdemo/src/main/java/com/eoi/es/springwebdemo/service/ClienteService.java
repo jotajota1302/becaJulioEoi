@@ -61,11 +61,26 @@ public class ClienteService {
 		Cliente entity= new Cliente();
 		entity.setDni(dto.getDni());
 		entity.setDireccion(dto.getDireccion());
-		entity.setNombre(dto.getNombre());
-		
-//		BeanUtils.copyProperties(dto, entity);
-		
+		entity.setNombre(dto.getNombre());		
+	
 		clienteRepository.save(entity);
+		
+	}
+	
+	public void update(ClienteDto dto) {
+		
+		Cliente entity= new Cliente();
+		entity.setDni(dto.getDni());
+		entity.setDireccion(dto.getDireccion());
+		entity.setNombre(dto.getNombre());		
+	
+		clienteRepository.save(entity);
+		
+	}
+
+	public void deleteById(String dni) {
+		
+		clienteRepository.deleteById(dni);
 		
 	}
 
