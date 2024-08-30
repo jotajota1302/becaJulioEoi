@@ -18,6 +18,8 @@ public class ClienteDto {
 	
 	private String nombre;
 	
+	private String direccion;
+	
 	private double saldo;
 	
 	

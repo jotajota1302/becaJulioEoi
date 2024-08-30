@@ -16,6 +16,21 @@ public class ClienteService {
 	@Autowired
 	ClienteRepository clienteRepository;
 	
+	public ClienteDto findByDni(String dni) {
+		
+		Cliente cliente=clienteRepository.findById(dni).get();
+		
+		ClienteDto dto= new ClienteDto();
+		dto.setDni(cliente.getDni());
+		dto.setNombre(cliente.getNombre());
+		
+		cliente.getCuentas().forEach(c->{			
+			dto.setSaldo(dto.getSaldo()+ c.getSaldo());
+		});
+				
+		return dto;
+	}
+	
 	public List<ClienteDto> findAll() {
 		
 		//en BBDD recupero entidades
@@ -38,6 +53,19 @@ public class ClienteService {
 		}
 				
 		return dtos;
+		
+	}
+
+	public void create(ClienteDto dto) {
+		
+		Cliente entity= new Cliente();
+		entity.setDni(dto.getDni());
+		entity.setDireccion(dto.getDireccion());
+		entity.setNombre(dto.getNombre());
+		
+//		BeanUtils.copyProperties(dto, entity);
+		
+		clienteRepository.save(entity);
 		
 	}
 
