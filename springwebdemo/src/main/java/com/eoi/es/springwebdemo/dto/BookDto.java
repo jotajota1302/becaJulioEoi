@@ -1,10 +1,13 @@
 package com.eoi.es.springwebdemo.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Getter
 @Setter
@@ -13,8 +16,15 @@ import lombok.Setter;
 @Builder
 public class BookDto {
 	
-	private int id;
-	private String title;
-	private String author;
+	@JsonIgnore
+	private int id;	
+
+	private String title;	
+	
+	private String author;	
+	
 	private String category;
+	
+	
+	
 }
