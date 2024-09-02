@@ -24,7 +24,7 @@ public class BookController {
 	private BookService bookService;
 
 	@GetMapping
-	public ResponseEntity<List<BookDto>> findAll(@RequestParam @Nullable int page,@RequestParam @Nullable int size) {
+	public ResponseEntity<List<BookDto>> findAll(@RequestParam int page,@RequestParam int size) {
 
 		Pageable pageable = PageRequest.of(page,size);
 		
