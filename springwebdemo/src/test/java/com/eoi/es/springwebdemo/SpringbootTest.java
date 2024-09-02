@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.eoi.es.springwebdemo.entity.Book;
 import com.eoi.es.springwebdemo.repository.BookRepository;
 
 @SpringBootTest
@@ -17,23 +16,15 @@ public class SpringbootTest {
 	@Test
 	public void test() {
 		
-		//SELECTS
-		System.out.println(bookRepository.findAll());
-		System.out.println(bookRepository.findById(3).get());	
-		
-		//INSERTS
-		
-		Book nuevo= Book.builder().author("JK Rowling").genre("Fantastico").title("HARRY FLOWERS").build();
-		bookRepository.save(nuevo);
-		
-		System.out.println(bookRepository.findAll());		
-		
-		//UPDATE == SAVE de una entidad que ya tiene ID	
-		
-		//DELETE
-		
-//		bookRepository.delete(nuevo);
-//		bookRepository.deleteById(6);
+//		List<Book> list = bookRepository.findByGenreAndAuthor("Ficción", "Harper Lee");
+//		
+//		List<Book> list2 = bookRepository.findByTitleStartingWith("M");
+//		
+//		int total = bookRepository.countByTitleStartingWith("M");
+//		
+//		List<Book> list3 = bookRepository.findDistinctByGenre("Ficción");
+//		
+//		System.out.println(list3);
 		
 	}
 }

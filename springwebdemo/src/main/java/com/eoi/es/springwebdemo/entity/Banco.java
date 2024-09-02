@@ -10,8 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table( name = "banco")
+@Getter
+@Setter
 public class Banco {
 	
 	@Id
@@ -25,32 +30,6 @@ public class Banco {
 	private String ciudad;
 	
 	@OneToMany(mappedBy = "banco")	
-	private List<Cuenta> cuentas;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getCiudad() {
-		return ciudad;
-	}
-
-	public void setCiudad(String ciudad) {
-		this.ciudad = ciudad;
-	}
-	
-	
+	private List<Cuenta> cuentas;	
 
 }

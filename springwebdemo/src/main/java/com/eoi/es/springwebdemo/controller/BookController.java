@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,11 +24,18 @@ public class BookController {
 	private BookService bookService;
 
 	@GetMapping
-	public ResponseEntity<List<BookDto>> findAll(@RequestParam int page,@RequestParam int size) {
+	public ResponseEntity<List<BookDto>> findAll(@RequestParam @Nullable String page,
+			@Nullable @RequestParam String size) {
 
-		Pageable pageable = PageRequest.of(page,size);
-		
-		return new ResponseEntity<List<BookDto>>(bookService.findAll(pageable), HttpStatus.OK);
+		if (page == null || size == null) {
+			return new ResponseEntity<List<BookDto>>(HttpStatus.BAD_REQUEST);
+
+		} else {
+			Pageable pageable = PageRequest.of(Integer.parseInt(page), Integer.parseInt(size));
+			return new ResponseEntity<List<BookDto>>(bookService.findAll(pageable), HttpStatus.OK);
+
+		}
+
 	}
 
 //	@GetMapping(value = "/{id}")

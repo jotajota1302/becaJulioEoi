@@ -11,12 +11,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BancoDto {
+public class CreateCuentaDto {
 
-	private String id;
+	private String dni;
 	
-	private String nombre;
+	private double saldo;
 	
-	private String ciudad;
+	private String idbanco;
 	
 }

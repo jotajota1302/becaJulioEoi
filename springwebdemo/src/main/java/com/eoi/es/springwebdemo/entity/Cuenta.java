@@ -9,8 +9,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "cuenta")
+@Getter
+@Setter
 public class Cuenta {
 	
 	@Id 
@@ -28,34 +33,6 @@ public class Cuenta {
 	@JoinColumn(name = "idBanco", referencedColumnName = "id")
 	private Banco banco;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Double getSaldo() {
-		return saldo;
-	}
-
-	public void setSaldo(Double saldo) {
-		this.saldo = saldo;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
-	@Override
-	public String toString() {
-		return "Cuenta [saldo=" + saldo + "]";
-	}
 	
 	
 }
