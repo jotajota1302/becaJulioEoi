@@ -3,6 +3,7 @@ package com.eoi.es.springwebdemo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +24,9 @@ public class BookController {
 	private BookService bookService;
 
 	@GetMapping
-	public ResponseEntity<List<BookDto>> findAll(@RequestParam @Nullable int size) {
+	public ResponseEntity<List<BookDto>> findAll(@RequestParam @Nullable int page,@RequestParam @Nullable int size) {
 
-		Pageable pageable = Pageable.ofSize(size);
+		Pageable pageable = PageRequest.of(page,size);
 		
 		return new ResponseEntity<List<BookDto>>(bookService.findAll(pageable), HttpStatus.OK);
 	}
