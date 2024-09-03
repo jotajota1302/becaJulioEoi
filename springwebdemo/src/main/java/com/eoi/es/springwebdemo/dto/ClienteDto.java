@@ -1,7 +1,10 @@
 package com.eoi.es.springwebdemo.dto;
 
+import java.util.Date;
+
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -31,6 +34,9 @@ public class ClienteDto {
 	
 	@JsonProperty(value = "budget")
 	private double saldo;
+	
+	@JsonProperty(value = "date")
+	private Date alta;
 	
 	
 	

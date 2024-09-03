@@ -1,5 +1,6 @@
 package com.eoi.es.springwebdemo.entity;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -31,6 +32,12 @@ public class Cliente {
 
 	@OneToMany(mappedBy = "cliente")
 	private List<Cuenta> cuentas;
+	
+	@Column
+	private Date alta;
+	
+	@Column
+	private Date fechaNacimiento;
 	
 	
 }

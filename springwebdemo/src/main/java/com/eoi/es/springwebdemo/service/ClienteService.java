@@ -23,7 +23,7 @@ public class ClienteService {
 		ClienteDto dto= new ClienteDto();
 		dto.setDni(cliente.getDni());
 		dto.setNombre(cliente.getNombre());
-		
+		dto.setAlta(cliente.getAlta());
 		cliente.getCuentas().forEach(c->{			
 			dto.setSaldo(dto.getSaldo()+ c.getSaldo());
 		});
