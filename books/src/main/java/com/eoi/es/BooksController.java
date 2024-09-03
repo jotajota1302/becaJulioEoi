@@ -26,9 +26,15 @@ public class BooksController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<BookDto> findByIdAll(@PathVariable Integer id){		
+	public ResponseEntity<BookDto> findById(@PathVariable Integer id){		
 			
 		return new ResponseEntity<BookDto>(booksService.findById(id),HttpStatus.OK);
+	}
+	
+	@GetMapping("/{id}/withAuthor")
+	public ResponseEntity<BookWithAuthorDto> findByIdWithActorDto(@PathVariable Integer id){		
+			
+		return new ResponseEntity<BookWithAuthorDto>(booksService.findByIdWithAuthor(id),HttpStatus.OK);
 	}
 	
 	@GetMapping("/author/{id}")
