@@ -44,10 +44,14 @@ public class ClienteService {
 		for (Cliente cliente : clientes) {
 			
 			ClienteDto dto= new ClienteDto();
-			dto.setDni("#########");
+			dto.setDireccion(cliente.getDireccion());
+			dto.setDni(cliente.getDni());
 			dto.setNombre(cliente.getNombre());
 			//COMO CONSIGO EL SALDO
-			dto.setSaldo(500);
+			
+			cliente.getCuentas().forEach(c->{
+				dto.setSaldo(dto.getSaldo()+c.getSaldo());
+			});			
 			
 			dtos.add(dto);
 		}
