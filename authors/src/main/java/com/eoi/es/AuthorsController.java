@@ -26,9 +26,15 @@ public class AuthorsController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<AuthorDto> findByIdAll(@PathVariable Integer id){		
+	public ResponseEntity<AuthorDto> findById(@PathVariable Integer id){		
 			
 		return new ResponseEntity<AuthorDto>(authorsService.findById(id),HttpStatus.OK);
+	}
+	
+	@GetMapping("/{id}/books")
+	public ResponseEntity<AuthorDto> findByIdwithBooks(@PathVariable Integer id){		
+			
+		return new ResponseEntity<AuthorDto>(authorsService.findByIdWithBooks(id),HttpStatus.OK);
 	}
 	
 	@PostMapping
