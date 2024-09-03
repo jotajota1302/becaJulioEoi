@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories
-public class BookksApp {
+public class BooksApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BookksApp.class, args);
+		SpringApplication.run(BooksApp.class, args);
 	}	
 
 }
