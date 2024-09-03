@@ -35,14 +35,18 @@ public class AuthorsService {
 
 		AuthorDto dto = entityToDto(author);
 
-		RestTemplate restTemplate = new RestTemplate();
+		try {
+			RestTemplate restTemplate = new RestTemplate();
 
-		ResponseEntity<List<BookDto>> booksResponse = restTemplate.exchange(
-				BOOKS_SERVICE_URL.concat(author.getId() + ""), HttpMethod.GET, null,
-				new ParameterizedTypeReference<List<BookDto>>() {
-				});
+			ResponseEntity<List<BookDto>> booksResponse = restTemplate.exchange(
+					BOOKS_SERVICE_URL.concat(author.getId() + ""), HttpMethod.GET, null,
+					new ParameterizedTypeReference<List<BookDto>>() {
+					});
+			dto.setBooks(booksResponse.getBody());
 
-		dto.setBooks(booksResponse.getBody());
+		} catch (Exception e) {
+			dto.setBooks(null);
+		}		
 
 		return dto;
 	}
