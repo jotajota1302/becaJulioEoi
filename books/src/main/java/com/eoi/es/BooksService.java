@@ -28,6 +28,18 @@ public class BooksService {
 		return entityToDto(booksRepository.findById(id).get());		
 	}
 	
+	public List<BookDto> findByAuthorId(Integer id){		
+		
+		List<BookDto> dtos= new ArrayList<BookDto>();
+		List<Book> lista = booksRepository.findByAuthor(id);
+		
+		for (Book book : lista) {
+			dtos.add(entityToDto(book));
+		}
+		
+		return dtos;
+	}
+	
 	public void create(BookDto dto) {
 		
 		Book entity = dtoToEntity(dto);		
@@ -55,7 +67,7 @@ public class BooksService {
 		BookDto dto= new BookDto();
 		dto.setId(book.getId());
 		dto.setTitle(book.getTitle());
-		dto.setAuthor_id(book.getAuthor_id());
+		dto.setAuthor(book.getAuthor());
 		
 		return dto;
 	}
@@ -65,7 +77,7 @@ public class BooksService {
 		Book book= new Book();
 		book.setId(dto.getId());
 		book.setTitle(dto.getTitle());
-		book.setAuthor_id(dto.getAuthor_id());
+		book.setAuthor(dto.getAuthor());
 		
 		return book;
 	}

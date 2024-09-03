@@ -22,6 +22,6 @@ public class Book {
 		@Column
 		private String title;
 		@Column
-		private String author_id;		
+		private Integer author;		
 
 }

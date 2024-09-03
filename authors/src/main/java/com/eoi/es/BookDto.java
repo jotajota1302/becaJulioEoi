@@ -9,8 +9,6 @@ public class BookDto {
 
 	private Integer id;
 
-	private String title;
-
-	private Integer author;
+	private String title;	
 
 }

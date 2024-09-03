@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class AuthorsService {
 
+	private static final String BOOKS_SERVICE_URL = "http://localhost:8082/books/author/";
+	
 	@Autowired
 	private AuthorsRepository authorsRepository;
 	
@@ -18,14 +24,26 @@ public class AuthorsService {
 		List<Author> entities = authorsRepository.findAll();		
 		for (Author author : entities) {
 			dtos.add(entityToDto(author));
-		}
+		}		
 		
 		return dtos;		
 	}
 	
 	public AuthorDto findById(Integer id){				
 		
-		return entityToDto(authorsRepository.findById(id).get());		
+		Author author = authorsRepository.findById(id).get();
+		
+		AuthorDto dto=entityToDto(author);
+		
+		RestTemplate restTemplate= new RestTemplate();
+		
+		ResponseEntity<List<BookDto>> booksResponse = restTemplate.exchange(BOOKS_SERVICE_URL.concat(author.getId()+""), HttpMethod.GET, null,
+				new ParameterizedTypeReference<List<BookDto>>() {
+				});
+		
+		dto.setBooks(booksResponse.getBody());
+		
+		return dto;
 	}
 	
 	public void create(AuthorDto dto) {
