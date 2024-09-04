@@ -36,13 +36,11 @@ public class BooksService {
 	public BookWithAuthorDto findByIdWithAuthor(Integer id){		
 		
 		BookDto dto = entityToDto(booksRepository.findById(id).get());		
+				
 		BookWithAuthorDto bookWithAuthorDto= new BookWithAuthorDto();
-		BeanUtils.copyProperties(dto, bookWithAuthorDto);
-		
-		try {
-		
-			bookWithAuthorDto.setAuthor(authorClient.getAuthorById(id));
-			
+		BeanUtils.copyProperties(dto, bookWithAuthorDto);		
+		try {		
+			bookWithAuthorDto.setAuthor(authorClient.getAuthorById(dto.getAuthor()));			
 		} catch (Exception e) {
 			dto.setAuthor(null);
 		}
