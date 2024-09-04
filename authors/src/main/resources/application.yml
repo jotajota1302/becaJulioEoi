@@ -24,3 +24,9 @@ eureka:
     lease-expiration-duration-in-seconds: 30  # Tiempo antes de que la instancia se considere caída
 server:
   port: 0
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,metrics,health
+          
