@@ -4,19 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 @Service
 public class AuthorsService {
 
-	private static final String BOOKS_SERVICE_URL = "http://localhost:8082/books/";
-
 	@Autowired
 	private AuthorsRepository authorsRepository;
+
+	@Autowired
+	private BookClient bookClient;
 
 	public List<AuthorDto> findAll() {
 
@@ -34,30 +31,23 @@ public class AuthorsService {
 		Author author = authorsRepository.findById(id).get();
 
 		AuthorDto dto = entityToDto(author);
-		
+
 		return dto;
 	}
-	
+
 	public AuthorDto findByIdWithBooks(Integer id) {
 
-		Author author = authorsRepository.findById(id).get();	
-		AuthorDto dto= new AuthorDto();
+		Author author = authorsRepository.findById(id).get();
+		AuthorDto dto = new AuthorDto();
 		dto.setId(author.getId());
 		dto.setName(author.getName());
 		dto.setSurname(author.getSurname());
-		
-		try {
-			RestTemplate restTemplate = new RestTemplate();
 
-			ResponseEntity<List<BookDto>> booksResponse = restTemplate.exchange(
-					BOOKS_SERVICE_URL.concat("/author/").concat(author.getId() + ""), HttpMethod.GET, null,
-					new ParameterizedTypeReference<List<BookDto>>() {
-					});
-			dto.setBooks(booksResponse.getBody());
-
+		try {		
+			dto.setBooks(bookClient.findBooksByAuthor(id).getBody());
 		} catch (Exception e) {
 			dto.setBooks(null);
-		}		
+		}
 
 		return dto;
 	}
@@ -93,7 +83,6 @@ public class AuthorsService {
 
 		return dto;
 	}
-	
 
 	private Author dtoToEntity(AuthorDto dto) {
 

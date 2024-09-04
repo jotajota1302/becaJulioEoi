@@ -1,6 +1,9 @@
 package com.eoi.es;
 
+import java.util.List;
+
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -11,7 +14,10 @@ public interface BookClient {
 	public BookDto getBookById(@PathVariable("id") Integer id);
 	
 	@GetMapping("/{id}/withAuthor")
-	public BookWithAuthorDto findByIdWithAuthorDto(@PathVariable Integer id);	
+	public ResponseEntity<BookWithAuthorDto> findByIdWithAuthorDto(@PathVariable Integer id);
 	
+	@GetMapping("/author/{id}")
+	public ResponseEntity<List<BookDto>> findBooksByAuthor(@PathVariable Integer id);
+
 
 }

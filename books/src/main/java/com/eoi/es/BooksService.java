@@ -5,16 +5,14 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 @Service
 public class BooksService {
-
-	private static final String AUTHORS_SERVICE_URL = "http://localhost:8081/authors";
+	
+	@Autowired
+	AuthorClient authorClient;
+	
 	@Autowired
 	private BooksRepository booksRepository;
 
@@ -42,12 +40,8 @@ public class BooksService {
 		BeanUtils.copyProperties(dto, bookWithAuthorDto);
 		
 		try {
-			RestTemplate restTemplate= new RestTemplate();
-			
-			ResponseEntity<AuthorDto> authorsResponse = restTemplate.exchange(AUTHORS_SERVICE_URL.concat("/").concat(id+""), HttpMethod.GET,
-					null, new ParameterizedTypeReference<AuthorDto>() {
-					});
-			bookWithAuthorDto.setAuthor(authorsResponse.getBody());
+		
+			bookWithAuthorDto.setAuthor(authorClient.getAuthorById(id));
 			
 		} catch (Exception e) {
 			dto.setAuthor(null);

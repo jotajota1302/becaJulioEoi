@@ -21,8 +21,8 @@ public class MyApiController {
 	}
 
 	@GetMapping("/book/{id}")
-	public BookDto getBook(@PathVariable("id") Integer id) {
-		return bookClient.getBookById(id);
+	public BookWithAuthorDto getBook(@PathVariable("id") Integer id) {
+		return bookClient.findByIdWithAuthorDto(id);
 	}
 
 }
