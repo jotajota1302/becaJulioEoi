@@ -1,0 +1,4 @@
+server:  port: ${CLIENT_PORT:8080}
+spring:  application:    name: api
+  main:
+    allow-bean-definition-overriding: trueeureka:  client:    registerWithEureka: false        fetchRegistry: true    serviceUrl:      defaultZone: http://${DISCOVERY_HOST:localhost}:${DISCOVERY_PORT:8761}/eureka/ribbon:  eureka:    enabled: true
